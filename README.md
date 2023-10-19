@@ -1,2 +1,2 @@
-# IIOT-Indra
+# Progetto Indra
 Gestione stazioni meteo
