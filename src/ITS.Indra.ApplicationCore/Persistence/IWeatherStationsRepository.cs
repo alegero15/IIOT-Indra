@@ -1,12 +1,9 @@
-﻿namespace ITS.Indra.ApplicationCore.Persistence
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿namespace ITS.Indra.ApplicationCore.Persistence;
 
-    public interface IWeatherStationsRepository
-    {
-    }
+using ITS.Indra.ApplicationCore.Entities;
+using System.Threading.Tasks;
+
+public interface IWeatherStationsRepository
+{
+    Task InsertAsync(WeatherStation weatherStation);
 }

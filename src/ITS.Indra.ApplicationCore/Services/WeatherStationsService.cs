@@ -1,5 +1,6 @@
 ﻿namespace ITS.Indra.ApplicationCore.Services;
 
+using ITS.Indra.ApplicationCore.Entities;
 using ITS.Indra.ApplicationCore.Persistence;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,8 @@ internal class WeatherStationsService: IWeatherStationsService
         _weatherStationsRepository = weatherStationsRepository;
     }
 
-
+    public Task InsertAsync(WeatherStation weatherStation)
+    {
+        return _weatherStationsRepository.InsertAsync(weatherStation);
+    }
 }
