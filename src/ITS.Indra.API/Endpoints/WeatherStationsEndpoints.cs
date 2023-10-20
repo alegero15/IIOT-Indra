@@ -16,6 +16,11 @@ namespace ITS.Indra.API.Endpoints
             .WithName(nameof(GetAllWeatherStation))
             .WithOpenApi();
 
+            group.MapGet("/{id}", GetWeatherStation)
+            .WithName(nameof(GetWeatherStation))
+            .WithOpenApi();
+
+
             return endpoints;
         }
         public static async Task<IResult> InsertWeatherStation(WeatherStation weatherStation, IWeatherStationsService weatherStationsService)
@@ -28,6 +33,15 @@ namespace ITS.Indra.API.Endpoints
         {
             var list = await weatherStationsService.GetAllAsync();
             return Results.Ok(list);
+        }
+
+        public static async Task<IResult> GetWeatherStation(int id, IWeatherStationsService weatherStationsService)
+        {
+            var item = await weatherStationsService.GetByIdAsync(id);
+            if (item == null)
+                return Results.NotFound();
+
+            return Results.Ok(item);
         }
     }
 }

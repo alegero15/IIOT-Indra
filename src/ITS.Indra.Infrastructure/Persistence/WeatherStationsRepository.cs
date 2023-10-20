@@ -33,6 +33,23 @@ internal class WeatherStationsRepository : IWeatherStationsRepository
         return await connection.QueryAsync<WeatherStation>(query);
     }
 
+    public async Task<WeatherStation?> GetByIdAsync(int id)
+    {
+        const string query = """
+            SELECT
+                id          as Id,
+                name        as Name,
+                latitude    as Latitude,
+                longitude   as Longitude,
+                code        as Code,
+                station_model as StationModel
+            FROM WeatherStations
+            WHERE id = @id
+            """;
+        using var connection = new NpgsqlConnection(_connectionString);
+        return await connection.QueryFirstOrDefaultAsync<WeatherStation>(query, new {id});
+    }
+
     public async Task InsertAsync(WeatherStation weatherStation)
     {
         const string query = """
