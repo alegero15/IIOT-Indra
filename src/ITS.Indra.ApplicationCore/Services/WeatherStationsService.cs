@@ -8,13 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal class WeatherStationsService: IWeatherStationsService
+internal class WeatherStationsService : IWeatherStationsService
 {
     private readonly IWeatherStationsRepository _weatherStationsRepository;
 
     public WeatherStationsService(IWeatherStationsRepository weatherStationsRepository)
     {
         _weatherStationsRepository = weatherStationsRepository;
+    }
+
+    public Task<IEnumerable<WeatherStation>> GetAllAsync()
+    {
+        return _weatherStationsRepository.GetAllAsync();
     }
 
     public Task InsertAsync(WeatherStation weatherStation)
