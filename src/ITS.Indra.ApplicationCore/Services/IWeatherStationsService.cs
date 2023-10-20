@@ -1,7 +1,10 @@
 ﻿namespace ITS.Indra.ApplicationCore.Services;
 
 using ITS.Indra.ApplicationCore.Entities;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 public interface IWeatherStationsService
@@ -10,5 +13,4 @@ public interface IWeatherStationsService
 
     Task<IEnumerable<WeatherStation>> GetAllAsync();
 
-    Task<WeatherStation?> GetByIdAsync(int id);
 }

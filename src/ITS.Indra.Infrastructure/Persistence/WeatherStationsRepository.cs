@@ -20,53 +20,60 @@ internal class WeatherStationsRepository : IWeatherStationsRepository
     public async Task<IEnumerable<WeatherStation>> GetAllAsync()
     {
         const string query = """
-            SELECT
-                id          as Id,
-                name        as Name,
-                latitude    as Latitude,
-                longitude   as Longitude,
-                code        as Code,
-                station_model as StationModel
-            FROM WeatherStations
-            """;
+                SELECT 
+                    id as Id,
+                    name as Name,
+                    latitude as Latitude,
+                    longitudine as Longitudine,
+                    code as Code,
+                    station_model as StationModel
+                FROM WeatherStations
+                """;
+
         using var connection = new NpgsqlConnection(_connectionString);
         return await connection.QueryAsync<WeatherStation>(query);
     }
 
-    public async Task<WeatherStation?> GetByIdAsync(int id)
+    public Task<WeatherStation> GetByIdAsync(int id)
     {
         const string query = """
-            SELECT
-                id          as Id,
-                name        as Name,
-                latitude    as Latitude,
-                longitude   as Longitude,
-                code        as Code,
-                station_model as StationModel
-            FROM WeatherStations
-            WHERE id = @id
-            """;
+                SELECT 
+                    id as Id,
+                    name as Name,
+                    latitude as Latitude,
+                    longitudine as Longitudine,
+                    code as Code,
+                    station_model as StationModel
+                FROM WeatherStations
+                WHERE id = @id 
+                """;
+        //anonymus type: quando l'argomento dentro new {} è uguale all'argomento GetByIdAsync() non serve dichiarare il tipo
         using var connection = new NpgsqlConnection(_connectionString);
-        return await connection.QueryFirstOrDefaultAsync<WeatherStation>(query, new {id});
+        return await connection.QueryFirstOrDefault<WeatherStation>(query, new {id});
     }
+}
 
     public async Task InsertAsync(WeatherStation weatherStation)
     {
+
         const string query = """
-            INSERT INTO WeatherStations(
+                INSERT INTO weatherstations(
                     name,
                     latitude,
-                    longitude,
+                    longitudine,
                     code,
                     station_model)
-            VALUES(
+                VALUES(
                     @Name,
                     @Latitude,
-                    @Longitude,
+                    @Longitudine,
                     @Code,
                     @StationModel);
-            """;
+                """;
+
         using var connection = new NpgsqlConnection(_connectionString);
         await connection.ExecuteAsync(query, weatherStation);
+        //dandoli in pasto un oggetto dapper mappa tutte le cose in base ai valori messi con  @
+
     }
 }

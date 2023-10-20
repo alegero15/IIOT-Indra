@@ -1,13 +1,21 @@
-﻿namespace ITS.Indra.ApplicationCore.Persistence;
-
-using ITS.Indra.ApplicationCore.Entities;
-using System.Threading.Tasks;
-
-public interface IWeatherStationsRepository
+﻿namespace ITS.Indra.ApplicationCore.Persistence
 {
-    Task InsertAsync(WeatherStation weatherStation);
+    using ITS.Indra.ApplicationCore.Entities;
+    using ITS.Indra.ApplicationCore.Services;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-    Task<IEnumerable<WeatherStation>> GetAllAsync();
+    public interface IWeatherStationsRepository
+    {
+        Task InsertAsync(WeatherStation weatherStation);
 
-    Task<WeatherStation?> GetByIdAsync(int id);
+        Task<IEnumerable<WeatherStation>> GetAllAsync();
+
+        Task<WeatherStation> GetByIdAsync(int id);  
+    }
 }
+
+//qualcuno ci implemet
