@@ -11,23 +11,12 @@ namespace ITS.Indra.API.Endpoints
             group.MapPost("/", InsertWeatherStation)
                  .WithName(nameof(InsertWeatherStation))
                  .WithOpenApi();
-
-            group.MapGet("/", GetAllWeatherStation)
-            .WithName(nameof(GetAllWeatherStation))
-            .WithOpenApi();
-
             return endpoints;
         }
         public static async Task<IResult> InsertWeatherStation(WeatherStation weatherStation, IWeatherStationsService weatherStationsService)
         {
             await weatherStationsService.InsertAsync(weatherStation);
             return Results.NoContent();
-        }
-
-        public static async Task<IResult> GetAllWeatherStation(IWeatherStationsService weatherStationsService)
-        {
-            var list = await weatherStationsService.GetAllAsync();
-            return Results.Ok(list);
         }
     }
 }

@@ -17,11 +17,6 @@ internal class WeatherStationsService: IWeatherStationsService
         _weatherStationsRepository = weatherStationsRepository;
     }
 
-    public Task<IEnumerable<WeatherStation>> GetAllAsync()
-    {
-        return _weatherStationsRepository.GetAllAsync();
-    }
-
     public Task InsertAsync(WeatherStation weatherStation)
     {
         return _weatherStationsRepository.InsertAsync(weatherStation);
